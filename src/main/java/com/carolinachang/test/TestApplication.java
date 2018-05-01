@@ -1,5 +1,6 @@
 package com.carolinachang.test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +9,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.carolinachang.test.domain.Categoria;
+import com.carolinachang.test.domain.Cidade;
+import com.carolinachang.test.domain.Estado;
 import com.carolinachang.test.domain.Produto;
 import com.carolinachang.test.repositories.CategoriaRepository;
+import com.carolinachang.test.repositories.CidadeRepository;
+import com.carolinachang.test.repositories.EstadoRepository;
 import com.carolinachang.test.repositories.ProdutoRepository;
 
 @SpringBootApplication
@@ -17,9 +22,12 @@ public class TestApplication implements CommandLineRunner{
 
 	@Autowired
 	private CategoriaRepository categoriaRepository;
-	
 	@Autowired
 	private ProdutoRepository produtoRepository;
+	@Autowired
+	private EstadoRepository estadoRepository;
+	@Autowired
+	private CidadeRepository cidadeRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(TestApplication.class, args);
@@ -29,8 +37,6 @@ public class TestApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		Categoria cat1 = new Categoria(null,"Informática");
 		Categoria cat2 = new Categoria(null,"Escritório");
-		categoriaRepository.saveAll(Arrays.asList(cat1,cat2));
-		
 		
 		Produto prod1 = new Produto(null, "Computador", 2000.00);
 		Produto prod2 = new Produto(null, "Impressora", 800.00);
@@ -43,7 +49,25 @@ public class TestApplication implements CommandLineRunner{
 		prod2.getCategorias().addAll(Arrays.asList(cat1,cat2));
 		prod3.getCategorias().addAll(Arrays.asList(cat1));
 		
+		Estado est1 = new Estado(null,"Minas Gerais");
+		Estado est2 = new Estado(null,"São Paulo");
+		
+		Cidade c1 = new Cidade(null,"Uberlândia",est1);
+		Cidade c2 = new Cidade(null,"São Paulo",est2);
+		Cidade c3 = new Cidade(null,"Campinas",est2);
+		
+		est1.getCidades().addAll(Arrays.asList(c1));
+		est2.getCidades().addAll(Arrays.asList(c2,c3));
+		
+		categoriaRepository.saveAll(Arrays.asList(cat1,cat2));
 		produtoRepository.saveAll(Arrays.asList(prod1,prod2,prod3));
+		estadoRepository.saveAll(Arrays.asList(est1,est2));
+		cidadeRepository.saveAll(Arrays.asList(c1,c2,c3));
+		
+		
+		
+		
+		
 		
 	}
 }
