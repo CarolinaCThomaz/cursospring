@@ -1,6 +1,5 @@
 package com.carolinachang.test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.carolinachang.test.domain.Categoria;
 import com.carolinachang.test.domain.Cidade;
+import com.carolinachang.test.domain.Cliente;
+import com.carolinachang.test.domain.Endereco;
 import com.carolinachang.test.domain.Estado;
 import com.carolinachang.test.domain.Produto;
+import com.carolinachang.test.domain.enums.TipoCliente;
 import com.carolinachang.test.repositories.CategoriaRepository;
 import com.carolinachang.test.repositories.CidadeRepository;
+import com.carolinachang.test.repositories.ClienteRepository;
+import com.carolinachang.test.repositories.EnderecoRepository;
 import com.carolinachang.test.repositories.EstadoRepository;
 import com.carolinachang.test.repositories.ProdutoRepository;
 
@@ -28,6 +32,10 @@ public class TestApplication implements CommandLineRunner{
 	private EstadoRepository estadoRepository;
 	@Autowired
 	private CidadeRepository cidadeRepository;
+	@Autowired
+	private ClienteRepository clienteRepository;
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(TestApplication.class, args);
@@ -59,14 +67,25 @@ public class TestApplication implements CommandLineRunner{
 		est1.getCidades().addAll(Arrays.asList(c1));
 		est2.getCidades().addAll(Arrays.asList(c2,c3));
 		
+		
+		Cliente cli1 = new Cliente(null, "Maria Silva", "maria@gmail.com","34974027883",TipoCliente.PESSOAFISICA);
+		
+		cli1.getTelefones().addAll(Arrays.asList("34546456","35464564"));
+		
+		Endereco e1 = new Endereco(null, "Rua JoãoFranco Oliveira", "91", "casa", "campininha", "04678100", cli1, c1);
+		Endereco e2 = new Endereco(null, "Rua Mendes", "91", "ap", "sto Amaro", "45564565", cli1, c2);
+		
+		cli1.getEnderecos().addAll(Arrays.asList(e1,e2));
+		
+				
+		
 		categoriaRepository.saveAll(Arrays.asList(cat1,cat2));
 		produtoRepository.saveAll(Arrays.asList(prod1,prod2,prod3));
 		estadoRepository.saveAll(Arrays.asList(est1,est2));
 		cidadeRepository.saveAll(Arrays.asList(c1,c2,c3));
-		
-		
-		
-		
+		clienteRepository.saveAll(Arrays.asList(cli1));
+		enderecoRepository.saveAll(Arrays.asList(e1,e2));
+				
 		
 		
 	}
