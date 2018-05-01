@@ -13,6 +13,7 @@ import com.carolinachang.test.domain.Cidade;
 import com.carolinachang.test.domain.Cliente;
 import com.carolinachang.test.domain.Endereco;
 import com.carolinachang.test.domain.Estado;
+import com.carolinachang.test.domain.ItemPedido;
 import com.carolinachang.test.domain.Pagamento;
 import com.carolinachang.test.domain.PagamentoComBooleto;
 import com.carolinachang.test.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.carolinachang.test.repositories.CidadeRepository;
 import com.carolinachang.test.repositories.ClienteRepository;
 import com.carolinachang.test.repositories.EnderecoRepository;
 import com.carolinachang.test.repositories.EstadoRepository;
+import com.carolinachang.test.repositories.ItemPedidoRepository;
 import com.carolinachang.test.repositories.PagamentoRepository;
 import com.carolinachang.test.repositories.PedidoRepository;
 import com.carolinachang.test.repositories.ProdutoRepository;
@@ -48,6 +50,8 @@ public class TestApplication implements CommandLineRunner{
 	private PedidoRepository pedidoRepository;
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(TestApplication.class, args);
@@ -103,6 +107,16 @@ public class TestApplication implements CommandLineRunner{
 		cli1.getPedidos().addAll(Arrays.asList(ped1,ped2));
 		
 		
+		ItemPedido ip1 = new ItemPedido(ped1, prod1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, prod3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, prod2, 100.00, 1, 400.00);
+		ped1.getItens().addAll(Arrays.asList(ip1,ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		prod1.getItens().addAll(Arrays.asList(ip1));
+		prod2.getItens().addAll(Arrays.asList(ip3));
+		prod3.getItens().addAll(Arrays.asList(ip2));
+		
 		categoriaRepository.saveAll(Arrays.asList(cat1,cat2));
 		produtoRepository.saveAll(Arrays.asList(prod1,prod2,prod3));
 		estadoRepository.saveAll(Arrays.asList(est1,est2));
@@ -111,7 +125,7 @@ public class TestApplication implements CommandLineRunner{
 		enderecoRepository.saveAll(Arrays.asList(e1,e2));
 		pedidoRepository.saveAll(Arrays.asList(ped1,ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1,pagto2));
-				
+		itemPedidoRepository.saveAll(Arrays.asList(ip1,ip2,ip3));				
 		
 		
 	}
