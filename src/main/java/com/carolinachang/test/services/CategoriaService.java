@@ -1,5 +1,6 @@
 package com.carolinachang.test.services;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -41,6 +42,11 @@ public class CategoriaService {
 			throw new DataIntegrityViolationException("Não é possível excluir categoria");
 		}
 		
+		
+	}
+
+	public List<Categoria> findAll() {
+		return repositorioCategoria.findAll();
 		
 	}
 }
