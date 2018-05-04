@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.carolinachang.test.domain.Categoria;
+import com.carolinachang.test.dto.CategoriaDTO;
 import com.carolinachang.test.repositories.CategoriaRepository;
 import com.carolinachang.test.services.exception.ObjectNotFoundException;
 
@@ -57,5 +58,9 @@ public class CategoriaService {
 		@SuppressWarnings("deprecation")
 		PageRequest pageRequest = new PageRequest(page, linesPerPage,Direction.valueOf(direction), orderBy);
 		return repositorioCategoria.findAll(pageRequest);
+	}
+	
+	public Categoria fromDTO(CategoriaDTO categoriaDTO) {
+		return new Categoria(categoriaDTO.getId(),categoriaDTO.getNome());
 	}
 }
