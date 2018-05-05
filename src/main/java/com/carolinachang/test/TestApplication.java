@@ -15,7 +15,7 @@ import com.carolinachang.test.domain.Endereco;
 import com.carolinachang.test.domain.Estado;
 import com.carolinachang.test.domain.ItemPedido;
 import com.carolinachang.test.domain.Pagamento;
-import com.carolinachang.test.domain.PagamentoComBooleto;
+import com.carolinachang.test.domain.PagamentoComBoleto;
 import com.carolinachang.test.domain.PagamentoComCartao;
 import com.carolinachang.test.domain.Pedido;
 import com.carolinachang.test.domain.Produto;
@@ -116,7 +116,7 @@ public class TestApplication implements CommandLineRunner{
 		Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
 		ped1.setPagamento(pagto1);
 		
-		Pagamento pagto2 = new PagamentoComBooleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("01/05/2018 19:00"), null);
+		Pagamento pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("01/05/2018 19:00"), null);
 		ped2.setPagamento(pagto2);
 		
 		
