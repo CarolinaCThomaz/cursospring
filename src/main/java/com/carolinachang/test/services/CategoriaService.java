@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.carolinachang.test.domain.Categoria;
+import com.carolinachang.test.domain.Cliente;
 import com.carolinachang.test.dto.CategoriaDTO;
 import com.carolinachang.test.repositories.CategoriaRepository;
 import com.carolinachang.test.services.exception.ObjectNotFoundException;
@@ -34,8 +35,13 @@ public class CategoriaService {
 	}
 
 	public Categoria update(Categoria obj) {
-		find(obj.getId());
-		return repositorioCategoria.save(obj);
+		Categoria categoria = find(obj.getId());
+		updateData(categoria,obj);
+		return repositorioCategoria.save(categoria);
+	}
+
+	private void updateData(Categoria categoria, Categoria obj) {
+		categoria.setNome(obj.getNome());
 	}
 
 	public void delete(Integer id) {
