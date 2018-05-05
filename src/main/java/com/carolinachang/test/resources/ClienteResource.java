@@ -20,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.carolinachang.test.domain.Cliente;
 import com.carolinachang.test.dto.ClienteDTO;
+import com.carolinachang.test.dto.ClienteNewDTO;
 import com.carolinachang.test.services.ClienteService;
 
 @RestController
@@ -35,7 +36,14 @@ public class ClienteResource {
 		return ResponseEntity.ok(obj);
 	}
 	
-
+	@RequestMapping(method=RequestMethod.POST)
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO clienteNewDto){
+		Cliente cliente = service.fromDTO(clienteNewDto);
+		cliente = service.insert(cliente);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId()).toUri();
+		return ResponseEntity.created(uri).build();
+	}
+	
 	@RequestMapping(value="/{id}" ,method=RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO categoriaDto, @PathVariable Integer id){
 		Cliente categoria = service.fromDTO(categoriaDto);
