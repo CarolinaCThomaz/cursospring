@@ -16,11 +16,14 @@ import org.springframework.stereotype.Service;
 import com.carolinachang.test.domain.Cidade;
 import com.carolinachang.test.domain.Cliente;
 import com.carolinachang.test.domain.Endereco;
+import com.carolinachang.test.domain.enums.Perfil;
 import com.carolinachang.test.domain.enums.TipoCliente;
 import com.carolinachang.test.dto.ClienteDTO;
 import com.carolinachang.test.dto.ClienteNewDTO;
 import com.carolinachang.test.repositories.ClienteRepository;
 import com.carolinachang.test.repositories.EnderecoRepository;
+import com.carolinachang.test.security.UserSS;
+import com.carolinachang.test.services.exception.AuthorizationException;
 import com.carolinachang.test.services.exception.ObjectNotFoundException;
 
 @Service
@@ -36,6 +39,12 @@ public class ClienteService {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	public Cliente find(Integer id) {
+		
+		UserSS user = UserService.authenticated();
+		if(user == null || user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
 		Optional<Cliente> obj = repositorioCliente.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 					"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName(), null));
