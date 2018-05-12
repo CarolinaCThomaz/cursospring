@@ -37,9 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
 	private JWTUtil jwtUtil;
-	
-	@Autowired 
-	private EmailService emailService;
+
 	
 	private static final String[] PUBLIC_MATCHERS = {
 			"/h2-console/**"
@@ -94,8 +92,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 	}
 	
-	@Bean
-    public EmailService emailService() {
-        return emailService;
-    }
 }
