@@ -1,5 +1,7 @@
 package com.carolinachang.test.services;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.carolinachang.test.domain.Cidade;
 import com.carolinachang.test.domain.Cliente;
@@ -29,6 +32,9 @@ import com.carolinachang.test.services.exception.ObjectNotFoundException;
 @Service
 public class ClienteService {
 
+	@Autowired
+	private S3Service s3Service;
+	
 	@Autowired
 	private ClienteRepository repositorioCliente;
 	
@@ -109,5 +115,9 @@ public class ClienteService {
 			cli.getTelefones().add(clienteNewDto.getTelefone3());
 		}
 		return cli;
+	}
+	
+	public URI uploadProfilePicture(MultipartFile multipartFile) throws URISyntaxException {
+		return s3Service.uploadFile(multipartFile);
 	}
 }

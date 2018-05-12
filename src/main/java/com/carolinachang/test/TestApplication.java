@@ -15,8 +15,8 @@ public class TestApplication implements CommandLineRunner{
 	
 	private Logger LOG = LoggerFactory.getLogger(S3Service.class);
 	
-	@Autowired
-	private S3Service s3Service;
+//	@Autowired
+//	private S3Service s3Service;
 	
 	
 	public static void main(String[] args) {
@@ -25,10 +25,10 @@ public class TestApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		try {	
-		s3Service.uploadFile("C:\\lagoa.jpg");
-		}catch (Exception e) {
-			LOG.info("Erro ao carregar img" +e.getMessage()) ;
-		}
+//		try {	
+//			s3Service.uploadFile("C:\\lagoa.jpg");
+//		}catch (Exception e) {
+//			LOG.info("Erro ao carregar img" +e.getMessage()) ;
+//		}
 	}
 }
