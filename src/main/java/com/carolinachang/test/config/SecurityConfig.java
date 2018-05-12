@@ -22,6 +22,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import com.carolinachang.test.security.JWTAuthenticationFilter;
 import com.carolinachang.test.security.JWTAuthorizationFilter;
 import com.carolinachang.test.security.JWTUtil;
+import com.carolinachang.test.services.EmailService;
 
 @Configuration
 @EnableWebSecurity
@@ -36,6 +37,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
 	private JWTUtil jwtUtil;
+	
+	@Autowired 
+	private EmailService emailService;
 	
 	private static final String[] PUBLIC_MATCHERS = {
 			"/h2-console/**"
@@ -89,4 +93,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		return new BCryptPasswordEncoder();
 		
 	}
+	
+	@Bean
+    public EmailService emailService() {
+        return emailService;
+    }
 }
