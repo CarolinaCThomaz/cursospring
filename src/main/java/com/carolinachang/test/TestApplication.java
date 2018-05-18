@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 import com.carolinachang.test.services.S3Service;
 
 @SpringBootApplication
-public class TestApplication implements CommandLineRunner{
+public class TestApplication extends SpringBootServletInitializer implements CommandLineRunner{
 
 	
 	private Logger LOG = LoggerFactory.getLogger(S3Service.class);
@@ -30,5 +32,11 @@ public class TestApplication implements CommandLineRunner{
 //		}catch (Exception e) {
 //			LOG.info("Erro ao carregar img" +e.getMessage()) ;
 //		}
+	}
+	
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		return super.configure(builder);
+		
 	}
 }
