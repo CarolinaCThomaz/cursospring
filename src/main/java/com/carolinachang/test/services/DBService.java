@@ -63,7 +63,8 @@ public class DBService {
 		Categoria cat4 = new Categoria(null, "Casa Mesa e banho");
 		Categoria cat5 = new Categoria(null, "Jardinagem");
 		Categoria cat6 = new Categoria(null, "Eletrônicos");
-
+		Categoria cat7 = new Categoria(null, "Perfumaria");
+		
 		Produto prod1 = new Produto(null, "Computador", 2000.00);
 		Produto prod2 = new Produto(null, "Impressora", 800.00);
 		Produto prod3 = new Produto(null, "Mouse", 80.00);
@@ -167,10 +168,19 @@ public class DBService {
 		cat4.getProdutos().addAll(Arrays.asList(prod1, prod2, prod3, prod7));
 		cat5.getProdutos().addAll(Arrays.asList(prod8));
 		cat6.getProdutos().addAll(Arrays.asList(prod9, prod10, prod11));
-
-		prod1.getCategorias().addAll(Arrays.asList(cat1));
-		prod2.getCategorias().addAll(Arrays.asList(cat1, cat2));
-		prod3.getCategorias().addAll(Arrays.asList(cat1));
+		cat7.getProdutos().addAll(Arrays.asList(prod11));
+		
+		prod1.getCategorias().addAll(Arrays.asList(cat1, cat4));
+		prod2.getCategorias().addAll(Arrays.asList(cat1, cat2, cat4));
+		prod3.getCategorias().addAll(Arrays.asList(cat1, cat4));
+		prod4.getCategorias().addAll(Arrays.asList(cat2));
+		prod5.getCategorias().addAll(Arrays.asList(cat3));
+		prod6.getCategorias().addAll(Arrays.asList(cat3));
+		prod7.getCategorias().addAll(Arrays.asList(cat4));
+		prod8.getCategorias().addAll(Arrays.asList(cat5));
+		prod9.getCategorias().addAll(Arrays.asList(cat6));
+		prod10.getCategorias().addAll(Arrays.asList(cat6));
+		prod11.getCategorias().addAll(Arrays.asList(cat7));
 
 		Estado est1 = new Estado(null, "Minas Gerais");
 		Estado est2 = new Estado(null, "São Paulo");
@@ -194,7 +204,7 @@ public class DBService {
 
 		Endereco e1 = new Endereco(null, "Rua JoãoFranco Oliveira", "91", "casa", "campininha", "04678100", cli1, c1);
 		Endereco e2 = new Endereco(null, "Rua Mendes", "91", "ap", "sto Amaro", "45564565", cli1, c2);
-		Endereco e3 = new Endereco(null, "Rua Mendes", "91", "ap", "sto Amaro", "45564565", cli1, c2);
+		Endereco e3 = new Endereco(null, "Rua Mendes", "91", "ap", "sto Amaro", "45564565", cli2, c2);
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
@@ -223,7 +233,7 @@ public class DBService {
 		prod2.getItens().addAll(Arrays.asList(ip3));
 		prod3.getItens().addAll(Arrays.asList(ip2));
 
-		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6));
+		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6,cat7));
 		produtoRepository
 				.saveAll(Arrays.asList(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8, prod9, prod10, prod11));
 		produtoRepository.saveAll(Arrays.asList(p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22, p23, p24, p25,
